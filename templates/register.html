@@ -1,0 +1,57 @@
+{% extends 'amazon.html' %}
+
+{% block title %}
+<title>Register</title>
+{% endblock %}
+
+{% block body_block %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+  <div class="card shadow-lg p-4" style="width: 400px; border-radius: 15px; border: none;">
+    <h3 class="text-center mb-4" style="color:#232f3e;">Create Your Account</h3>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      {% if not otp_sent %}
+        <!-- Step 1: Ask for email and password -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" name="email" id="email" class="form-control"
+                 placeholder="Enter your email" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">New Password:</label>
+          <input type="password" name="password" id="password" class="form-control"
+                 placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn w-100"
+                style="background-color:#37475a; color:white; font-weight:600;">
+          Send OTP
+        </button>
+
+      {% else %}
+        <!-- Step 2: Ask for OTP -->
+        <input type="hidden" name="email" value="{{ email }}">
+        <input type="hidden" name="password" value="{{ request.session.password }}">
+        
+        <div class="mb-3">
+          <label for="otp" class="form-label">Enter OTP sent to {{ email }}:</label>
+          <input type="text" name="otp" id="otp" class="form-control"
+                 placeholder="Enter OTP" required>
+        </div>
+
+        <button type="submit" class="btn w-100"
+                style="background-color:#ff9900; color:#232f3e; font-weight:600;">
+          Verify OTP
+        </button>
+      {% endif %}
+
+      <p class="text-center mt-3">Already have an account?
+        <a href="{% url 'login' %}" style="color:#007185; text-decoration:none;">Login here</a>
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'amazon.html' %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block body_block %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+  <div class="card shadow-lg p-4" style="width: 380px; border-radius: 15px; border: none;">
+    <h3 class="text-center mb-4" style="color:#232f3e;">Login to Your Account</h3>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+      </div>
+
+      <button type="submit" class="btn w-100" style="background-color:#ff9900; color:#232f3e; font-weight:600;">
+        Login
+      </button>
+
+      <p class="text-center mt-3">Don’t have an account?
+        <a href="{% url 'register' %}" style="color:#007185; text-decoration:none;">Register here</a>
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock %}
