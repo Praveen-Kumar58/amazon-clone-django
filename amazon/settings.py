@@ -128,6 +128,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+
+
+
+from dotenv import load_dotenv
+load_dotenv()
+
 # -------------------------------
 # EMAIL SETTINGS FOR OTP
 # -------------------------------
@@ -140,7 +146,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Your Gmail (sender)
-EMAIL_HOST_USER = 'prawin7396@gmail.com'
 
-# Your Gmail APP PASSWORD (not your normal password)
-EMAIL_HOST_PASSWORD = 'psfz rwuz clhm hfxt'
+
+
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
